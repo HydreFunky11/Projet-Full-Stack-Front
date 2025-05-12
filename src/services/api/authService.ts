@@ -39,6 +39,7 @@ async login(email: string, password: string) {
         method: 'POST',
         body: { username, email, password },
         includeAuth: false,
+        noCors: true
       });
       
       // Stocker le token après une inscription réussie
