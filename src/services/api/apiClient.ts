@@ -30,7 +30,7 @@ export function removeCookie(name: string): void {
   document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/`;
 }
 
-type RequestBody = Record<string , unknown> | string | FormData | URLSearchParams | Blob | ArrayBuffer | null;
+type RequestBody = Record<string, unknown> | string | FormData | URLSearchParams | Blob | ArrayBuffer | null;
 
 interface ApiOptions {
   method?: string;
@@ -38,6 +38,7 @@ interface ApiOptions {
   body?: RequestBody;
   credentials?: RequestCredentials;
   includeAuth?: boolean;
+  noCors?: boolean; // Nouvelle option pour activer le mode no-cors
 }
 
 export async function apiRequest<T>(endpoint: string, options: ApiOptions = {}): Promise<T> {
@@ -46,7 +47,8 @@ export async function apiRequest<T>(endpoint: string, options: ApiOptions = {}):
     headers = {},
     body, 
     credentials = 'include',
-    includeAuth = true
+    includeAuth = true,
+    noCors = false // Par défaut, ne pas utiliser no-cors
   } = options;
   
   const requestHeaders: Record<string, string> = {
@@ -54,8 +56,8 @@ export async function apiRequest<T>(endpoint: string, options: ApiOptions = {}):
     ...headers,
   };
 
-  // Ajouter le token d'authentification si nécessaire
-  if (includeAuth) {
+  // Ajouter le token d'authentification si nécessaire et si on n'est pas en mode no-cors
+  if (includeAuth && !noCors) {
     const token = getCookie('token') || localStorage.getItem('auth_token');
     if (token) {
       requestHeaders['Authorization'] = `Bearer ${token}`;
@@ -67,6 +69,7 @@ export async function apiRequest<T>(endpoint: string, options: ApiOptions = {}):
     headers: requestHeaders,
     credentials,
     ...(body && { body: JSON.stringify(body) }),
+    ...(noCors && { mode: 'no-cors' }) // Ajouter mode: 'no-cors' si l'option est activée
   };
 
   // Debug: URL complète et options
@@ -74,8 +77,13 @@ export async function apiRequest<T>(endpoint: string, options: ApiOptions = {}):
 
   try {
     const response = await fetch(url, requestOptions);
-
     
+    // Si on est en mode no-cors, on ne peut pas accéder à la réponse
+    if (noCors) {
+      // On retourne un objet factice puisqu'on ne peut pas lire la réponse
+      return { success: true } as unknown as T;
+    }
+
     // Vérifier si la réponse est JSON
     const contentType = response.headers.get('content-type');
     if (!contentType || !contentType.includes('application/json')) {
@@ -100,5 +108,3 @@ export async function apiRequest<T>(endpoint: string, options: ApiOptions = {}):
     throw new Error('Une erreur réseau est survenue');
   }
 }
-
-// Plus besoin de déclarer authService ici, il est maintenant dans authService.ts

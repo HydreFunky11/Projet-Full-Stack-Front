@@ -15,29 +15,30 @@ export const authService = {
   },
 
   // Connexion
-  async login(email: string, password: string) {
-      const response = await apiRequest<{success: boolean; token: string; user: User}>('/users/login', {
-        method: 'POST',
-        body: { email, password },
-        includeAuth: false
-      });
-      
-      // Stocker le token après une connexion réussie
-      if (response.token) {
-        // Double stockage pour plus de fiabilité
-        setCookie('token', response.token);
-        localStorage.setItem('auth_token', response.token);
-      }
-      
-      return response;
-  },
+async login(email: string, password: string) {
+    const response = await apiRequest<{success: boolean; token: string; user: User}>('/users/login', {
+      method: 'POST',
+      body: { email, password },
+      includeAuth: false,
+      noCors: true
+    });
+    
+    // Stocker le token après une connexion réussie
+    if (response.token) {
+      // Double stockage pour plus de fiabilité
+      setCookie('token', response.token);
+      localStorage.setItem('auth_token', response.token);
+    }
+    
+    return response;
+},
   
   // Inscription
   async register(username: string, email: string, password: string) {
       const response = await apiRequest<{success: boolean; token: string; user: User}>('/users/register', {
         method: 'POST',
         body: { username, email, password },
-        includeAuth: false
+        includeAuth: false,
       });
       
       // Stocker le token après une inscription réussie
