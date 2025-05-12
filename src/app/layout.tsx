@@ -1,22 +1,25 @@
-import '../styles/globals.scss';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import { AuthProvider } from '../contexts/authContext';
+import Navigation from '../components/navigation';
+import '../styles/globals.scss';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Projet Full Stack',
-  description: 'Application Full Stack avec Next.js, React, et SCSS',
+  title: 'App de Jeu de Rôle',
+  description: 'Application de gestion de jeux de rôle',
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="fr">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <AuthProvider>
+          <Navigation />
+          <div className="container">{children}</div>
+        </AuthProvider>
+      </body>
     </html>
   );
 }

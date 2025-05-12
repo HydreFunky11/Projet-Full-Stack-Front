@@ -1,0 +1,250 @@
+/* [project]/src/styles/sessions.module.scss.module.css [app-client] (css) */
+.sessions-module-scss-module__BOZBiG__sessionsContainer {
+  padding: 1.5rem;
+}
+
+.sessions-module-scss-module__BOZBiG__sessionsContainer .sessions-module-scss-module__BOZBiG__header {
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  display: flex;
+}
+
+.sessions-module-scss-module__BOZBiG__sessionsContainer .sessions-module-scss-module__BOZBiG__header h1 {
+  color: #333;
+  margin: 0;
+  font-size: 2rem;
+}
+
+.sessions-module-scss-module__BOZBiG__sessionsContainer .sessions-module-scss-module__BOZBiG__header .sessions-module-scss-module__BOZBiG__createButton {
+  color: #fff;
+  cursor: pointer;
+  background-color: #3b82f6;
+  border: none;
+  border-radius: 6px;
+  padding: .75rem 1.25rem;
+  font-weight: 500;
+  transition: background-color .3s;
+}
+
+.sessions-module-scss-module__BOZBiG__sessionsContainer .sessions-module-scss-module__BOZBiG__header .sessions-module-scss-module__BOZBiG__createButton:hover {
+  background-color: #2563eb;
+}
+
+.sessions-module-scss-module__BOZBiG__sessionsContainer .sessions-module-scss-module__BOZBiG__loading, .sessions-module-scss-module__BOZBiG__sessionsContainer .sessions-module-scss-module__BOZBiG__error, .sessions-module-scss-module__BOZBiG__sessionsContainer .sessions-module-scss-module__BOZBiG__noSessions {
+  text-align: center;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 1px 3px #0000001a;
+}
+
+.sessions-module-scss-module__BOZBiG__sessionsContainer .sessions-module-scss-module__BOZBiG__error {
+  color: #ef4444;
+  border-left: 4px solid #ef4444;
+}
+
+.sessions-module-scss-module__BOZBiG__sessionsContainer .sessions-module-scss-module__BOZBiG__noSessions {
+  color: #6b7280;
+  font-style: italic;
+}
+
+.sessions-module-scss-module__BOZBiG__sessionsContainer .sessions-module-scss-module__BOZBiG__createFormContainer {
+  background-color: #fff;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px #0000001a;
+}
+
+.sessions-module-scss-module__BOZBiG__sessionsContainer .sessions-module-scss-module__BOZBiG__createFormContainer h2 {
+  color: #333;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.sessions-module-scss-module__BOZBiG__sessionsContainer .sessions-module-scss-module__BOZBiG__createFormContainer .sessions-module-scss-module__BOZBiG__createForm .sessions-module-scss-module__BOZBiG__formGroup {
+  margin-bottom: 1.25rem;
+}
+
+.sessions-module-scss-module__BOZBiG__sessionsContainer .sessions-module-scss-module__BOZBiG__createFormContainer .sessions-module-scss-module__BOZBiG__createForm .sessions-module-scss-module__BOZBiG__formGroup label {
+  color: #374151;
+  margin-bottom: .5rem;
+  font-weight: 500;
+  display: block;
+}
+
+.sessions-module-scss-module__BOZBiG__sessionsContainer .sessions-module-scss-module__BOZBiG__createFormContainer .sessions-module-scss-module__BOZBiG__createForm .sessions-module-scss-module__BOZBiG__formGroup input, .sessions-module-scss-module__BOZBiG__sessionsContainer .sessions-module-scss-module__BOZBiG__createFormContainer .sessions-module-scss-module__BOZBiG__createForm .sessions-module-scss-module__BOZBiG__formGroup textarea, .sessions-module-scss-module__BOZBiG__sessionsContainer .sessions-module-scss-module__BOZBiG__createFormContainer .sessions-module-scss-module__BOZBiG__createForm .sessions-module-scss-module__BOZBiG__formGroup select {
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  width: 100%;
+  padding: .75rem;
+  font-size: 1rem;
+}
+
+.sessions-module-scss-module__BOZBiG__sessionsContainer .sessions-module-scss-module__BOZBiG__createFormContainer .sessions-module-scss-module__BOZBiG__createForm .sessions-module-scss-module__BOZBiG__formGroup input:focus, .sessions-module-scss-module__BOZBiG__sessionsContainer .sessions-module-scss-module__BOZBiG__createFormContainer .sessions-module-scss-module__BOZBiG__createForm .sessions-module-scss-module__BOZBiG__formGroup textarea:focus, .sessions-module-scss-module__BOZBiG__sessionsContainer .sessions-module-scss-module__BOZBiG__createFormContainer .sessions-module-scss-module__BOZBiG__createForm .sessions-module-scss-module__BOZBiG__formGroup select:focus {
+  border-color: #3b82f6;
+  outline: none;
+  box-shadow: 0 0 0 3px #3b82f633;
+}
+
+.sessions-module-scss-module__BOZBiG__sessionsContainer .sessions-module-scss-module__BOZBiG__createFormContainer .sessions-module-scss-module__BOZBiG__createForm .sessions-module-scss-module__BOZBiG__formGroup textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.sessions-module-scss-module__BOZBiG__sessionsContainer .sessions-module-scss-module__BOZBiG__createFormContainer .sessions-module-scss-module__BOZBiG__createForm .sessions-module-scss-module__BOZBiG__formRow {
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  display: flex;
+}
+
+.sessions-module-scss-module__BOZBiG__sessionsContainer .sessions-module-scss-module__BOZBiG__createFormContainer .sessions-module-scss-module__BOZBiG__createForm .sessions-module-scss-module__BOZBiG__formRow .sessions-module-scss-module__BOZBiG__formGroup {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+@media (width <= 768px) {
+  .sessions-module-scss-module__BOZBiG__sessionsContainer .sessions-module-scss-module__BOZBiG__createFormContainer .sessions-module-scss-module__BOZBiG__createForm .sessions-module-scss-module__BOZBiG__formRow {
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+}
+
+.sessions-module-scss-module__BOZBiG__sessionsContainer .sessions-module-scss-module__BOZBiG__createFormContainer .sessions-module-scss-module__BOZBiG__createForm .sessions-module-scss-module__BOZBiG__formActions {
+  margin-top: 1.5rem;
+}
+
+.sessions-module-scss-module__BOZBiG__sessionsContainer .sessions-module-scss-module__BOZBiG__createFormContainer .sessions-module-scss-module__BOZBiG__createForm .sessions-module-scss-module__BOZBiG__formActions .sessions-module-scss-module__BOZBiG__submitButton {
+  color: #fff;
+  cursor: pointer;
+  background-color: #3b82f6;
+  border: none;
+  border-radius: 6px;
+  padding: .75rem 1.5rem;
+  font-weight: 500;
+  transition: background-color .3s;
+}
+
+.sessions-module-scss-module__BOZBiG__sessionsContainer .sessions-module-scss-module__BOZBiG__createFormContainer .sessions-module-scss-module__BOZBiG__createForm .sessions-module-scss-module__BOZBiG__formActions .sessions-module-scss-module__BOZBiG__submitButton:hover {
+  background-color: #2563eb;
+}
+
+.sessions-module-scss-module__BOZBiG__sessionsContainer .sessions-module-scss-module__BOZBiG__createFormContainer .sessions-module-scss-module__BOZBiG__createForm .sessions-module-scss-module__BOZBiG__formActions .sessions-module-scss-module__BOZBiG__submitButton:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+.sessions-module-scss-module__BOZBiG__sessionsContainer .sessions-module-scss-module__BOZBiG__sessionsList {
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
+  display: grid;
+}
+
+@media (width <= 640px) {
+  .sessions-module-scss-module__BOZBiG__sessionsContainer .sessions-module-scss-module__BOZBiG__sessionsList {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sessions-module-scss-module__BOZBiG__sessionsContainer .sessions-module-scss-module__BOZBiG__sessionsList .sessions-module-scss-module__BOZBiG__sessionCard {
+  color: inherit;
+  background-color: #fff;
+  border-radius: 8px;
+  flex-direction: column;
+  padding: 1.5rem;
+  text-decoration: none;
+  transition: transform .2s, box-shadow .2s;
+  display: flex;
+  box-shadow: 0 1px 3px #0000001a;
+}
+
+.sessions-module-scss-module__BOZBiG__sessionsContainer .sessions-module-scss-module__BOZBiG__sessionsList .sessions-module-scss-module__BOZBiG__sessionCard:hover {
+  text-decoration: none;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 6px #0000001a;
+}
+
+.sessions-module-scss-module__BOZBiG__sessionsContainer .sessions-module-scss-module__BOZBiG__sessionsList .sessions-module-scss-module__BOZBiG__sessionCard .sessions-module-scss-module__BOZBiG__sessionHeader {
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  display: flex;
+}
+
+.sessions-module-scss-module__BOZBiG__sessionsContainer .sessions-module-scss-module__BOZBiG__sessionsList .sessions-module-scss-module__BOZBiG__sessionCard .sessions-module-scss-module__BOZBiG__sessionHeader h2 {
+  color: #111827;
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.sessions-module-scss-module__BOZBiG__sessionsContainer .sessions-module-scss-module__BOZBiG__sessionsList .sessions-module-scss-module__BOZBiG__sessionCard .sessions-module-scss-module__BOZBiG__sessionHeader .sessions-module-scss-module__BOZBiG__status {
+  text-transform: uppercase;
+  border-radius: 9999px;
+  padding: .25rem .75rem;
+  font-size: .75rem;
+  font-weight: 600;
+}
+
+.sessions-module-scss-module__BOZBiG__sessionsContainer .sessions-module-scss-module__BOZBiG__sessionsList .sessions-module-scss-module__BOZBiG__sessionCard .sessions-module-scss-module__BOZBiG__sessionHeader .sessions-module-scss-module__BOZBiG__status.sessions-module-scss-module__BOZBiG__planned {
+  color: #d97706;
+  background-color: #fef3c7;
+}
+
+.sessions-module-scss-module__BOZBiG__sessionsContainer .sessions-module-scss-module__BOZBiG__sessionsList .sessions-module-scss-module__BOZBiG__sessionCard .sessions-module-scss-module__BOZBiG__sessionHeader .sessions-module-scss-module__BOZBiG__status.sessions-module-scss-module__BOZBiG__inProgress {
+  color: #16a34a;
+  background-color: #dcfce7;
+}
+
+.sessions-module-scss-module__BOZBiG__sessionsContainer .sessions-module-scss-module__BOZBiG__sessionsList .sessions-module-scss-module__BOZBiG__sessionCard .sessions-module-scss-module__BOZBiG__sessionHeader .sessions-module-scss-module__BOZBiG__status.sessions-module-scss-module__BOZBiG__completed {
+  color: #6b7280;
+  background-color: #e5e7eb;
+}
+
+.sessions-module-scss-module__BOZBiG__sessionsContainer .sessions-module-scss-module__BOZBiG__sessionsList .sessions-module-scss-module__BOZBiG__sessionCard .sessions-module-scss-module__BOZBiG__sessionInfo {
+  flex-direction: column;
+  flex: 1;
+  display: flex;
+}
+
+.sessions-module-scss-module__BOZBiG__sessionsContainer .sessions-module-scss-module__BOZBiG__sessionsList .sessions-module-scss-module__BOZBiG__sessionCard .sessions-module-scss-module__BOZBiG__sessionInfo .sessions-module-scss-module__BOZBiG__description {
+  color: #4b5563;
+  flex: 1;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.sessions-module-scss-module__BOZBiG__sessionsContainer .sessions-module-scss-module__BOZBiG__sessionsList .sessions-module-scss-module__BOZBiG__sessionCard .sessions-module-scss-module__BOZBiG__sessionInfo .sessions-module-scss-module__BOZBiG__description .sessions-module-scss-module__BOZBiG__noDescription {
+  color: #9ca3af;
+  font-style: italic;
+}
+
+.sessions-module-scss-module__BOZBiG__sessionsContainer .sessions-module-scss-module__BOZBiG__sessionsList .sessions-module-scss-module__BOZBiG__sessionCard .sessions-module-scss-module__BOZBiG__sessionInfo .sessions-module-scss-module__BOZBiG__metadata {
+  color: #6b7280;
+  margin-top: auto;
+  font-size: .875rem;
+}
+
+.sessions-module-scss-module__BOZBiG__sessionsContainer .sessions-module-scss-module__BOZBiG__sessionsList .sessions-module-scss-module__BOZBiG__sessionCard .sessions-module-scss-module__BOZBiG__sessionInfo .sessions-module-scss-module__BOZBiG__metadata .sessions-module-scss-module__BOZBiG__gmInfo, .sessions-module-scss-module__BOZBiG__sessionsContainer .sessions-module-scss-module__BOZBiG__sessionsList .sessions-module-scss-module__BOZBiG__sessionCard .sessions-module-scss-module__BOZBiG__sessionInfo .sessions-module-scss-module__BOZBiG__metadata .sessions-module-scss-module__BOZBiG__dateInfo {
+  margin-bottom: .5rem;
+}
+
+.sessions-module-scss-module__BOZBiG__sessionsContainer .sessions-module-scss-module__BOZBiG__sessionsList .sessions-module-scss-module__BOZBiG__sessionCard .sessions-module-scss-module__BOZBiG__sessionInfo .sessions-module-scss-module__BOZBiG__metadata .sessions-module-scss-module__BOZBiG__gmInfo .sessions-module-scss-module__BOZBiG__label, .sessions-module-scss-module__BOZBiG__sessionsContainer .sessions-module-scss-module__BOZBiG__sessionsList .sessions-module-scss-module__BOZBiG__sessionCard .sessions-module-scss-module__BOZBiG__sessionInfo .sessions-module-scss-module__BOZBiG__metadata .sessions-module-scss-module__BOZBiG__dateInfo .sessions-module-scss-module__BOZBiG__label {
+  color: #4b5563;
+  font-weight: 500;
+}
+
+.sessions-module-scss-module__BOZBiG__sessionsContainer .sessions-module-scss-module__BOZBiG__sessionsList .sessions-module-scss-module__BOZBiG__sessionCard .sessions-module-scss-module__BOZBiG__sessionInfo .sessions-module-scss-module__BOZBiG__metadata .sessions-module-scss-module__BOZBiG__stats {
+  gap: 1rem;
+  margin-top: .75rem;
+  display: flex;
+}
+
+.sessions-module-scss-module__BOZBiG__sessionsContainer .sessions-module-scss-module__BOZBiG__sessionsList .sessions-module-scss-module__BOZBiG__sessionCard .sessions-module-scss-module__BOZBiG__sessionInfo .sessions-module-scss-module__BOZBiG__metadata .sessions-module-scss-module__BOZBiG__stats .sessions-module-scss-module__BOZBiG__count {
+  color: #3b82f6;
+  font-weight: 600;
+}
+
+
+/*# sourceMappingURL=src_styles_sessions_module_scss_module_7f3f10a6.css.map*/

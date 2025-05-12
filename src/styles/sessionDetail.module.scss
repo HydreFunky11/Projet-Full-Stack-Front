@@ -1,0 +1,327 @@
+.sessionDetail {
+  padding: 1rem;
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    
+    .backButton {
+      padding: 0.5rem 1rem;
+      background-color: #f3f4f6;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+      
+      &:hover {
+        background-color: #e5e7eb;
+        text-decoration: none;
+      }
+    }
+    
+    .actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+    
+    .actionButton {
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      border: none;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      
+      &:not(.delete):not(.cancel) {
+        background-color: #3b82f6;
+        color: white;
+        
+        &:hover {
+          background-color: #2563eb;
+        }
+      }
+      
+      &.delete {
+        background-color: #ef4444;
+        color: white;
+        
+        &:hover {
+          background-color: #dc2626;
+        }
+      }
+      
+      &.cancel {
+        background-color: #9ca3af;
+        color: white;
+        
+        &:hover {
+          background-color: #6b7280;
+        }
+      }
+    }
+  }
+  
+  .sessionHeader {
+    margin-bottom: 1.5rem;
+    
+    h1 {
+      font-size: 1.875rem;
+      margin: 0 0 0.5rem 0;
+    }
+    
+    .sessionMeta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      
+      .status {
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        
+        &.planifiée {
+          background-color: #f59e0b;
+          color: white;
+        }
+        
+        &.en_cours {
+          background-color: #10b981;
+          color: white;
+        }
+        
+        &.terminée {
+          background-color: #6b7280;
+          color: white;
+        }
+      }
+      
+      .gamemaster, .date {
+        font-size: 0.875rem;
+        color: #4b5563;
+      }
+    }
+  }
+  
+  .tabs {
+    display: flex;
+    border-bottom: 1px solid #e5e7eb;
+    margin-bottom: 1.5rem;
+    
+    .tab {
+      padding: 0.75rem 1.25rem;
+      border: none;
+      background: none;
+      font-weight: 500;
+      cursor: pointer;
+      color: #6b7280;
+      transition: color 0.3s, border-color 0.3s;
+      
+      &:hover {
+        color: #3b82f6;
+      }
+      
+      &.active {
+        color: #3b82f6;
+        border-bottom: 2px solid #3b82f6;
+      }
+    }
+  }
+  
+  .tabContent {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    
+    .infoTab {
+      .description {
+        h2 {
+          font-size: 1.25rem;
+          margin-top: 0;
+          margin-bottom: 0.75rem;
+          color: #374151;
+        }
+        
+        p {
+          margin: 0;
+          line-height: 1.6;
+          color: #4b5563;
+        }
+      }
+      
+      .noDescription {
+        color: #9ca3af;
+        font-style: italic;
+      }
+    }
+    
+    .charactersTab {
+      .charactersList {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1rem;
+        
+        .characterCard {
+          display: block;
+          padding: 1rem;
+          border-radius: 8px;
+          border: 1px solid #e5e7eb;
+          transition: box-shadow 0.3s, border-color 0.3s;
+          
+          &:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 4px 6px rgba(59, 130, 246, 0.1);
+            text-decoration: none;
+          }
+          
+          .characterHeader {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            
+            h3 {
+              margin: 0;
+              font-size: 1.125rem;
+              color: #111827;
+            }
+            
+            span {
+              font-size: 0.875rem;
+              color: #6b7280;
+            }
+          }
+          
+          .characterMeta, .characterOwner {
+            margin: 0.25rem 0;
+            font-size: 0.875rem;
+            color: #4b5563;
+          }
+        }
+      }
+      
+      .noCharacters {
+        color: #9ca3af;
+        font-style: italic;
+        text-align: center;
+        padding: 2rem 0;
+      }
+    }
+    
+    .diceRollsTab {
+      .diceRollHistory {
+        margin-top: 2rem;
+        
+        h3 {
+          font-size: 1.125rem;
+          margin-top: 0;
+          margin-bottom: 1rem;
+          color: #374151;
+        }
+        
+        .rollsList {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          
+          .rollItem {
+            padding: 0.75rem;
+            border-bottom: 1px solid #e5e7eb;
+            
+            &:last-child {
+              border-bottom: none;
+            }
+            
+            .rollHeader {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin-bottom: 0.25rem;
+              
+              .rollExpression {
+                font-weight: 500;
+                color: #374151;
+              }
+              
+              .rollResult {
+                font-weight: 700;
+                font-size: 1.125rem;
+                color: #3b82f6;
+              }
+            }
+            
+            .rollMeta {
+              font-size: 0.75rem;
+              color: #6b7280;
+              display: flex;
+              gap: 0.5rem;
+            }
+          }
+        }
+        
+        .noRolls {
+          color: #9ca3af;
+          font-style: italic;
+          text-align: center;
+          padding: 1rem 0;
+        }
+      }
+    }
+  }
+  
+  .editForm {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    
+    h1 {
+      font-size: 1.5rem;
+      margin-top: 0;
+      margin-bottom: 1.5rem;
+    }
+    
+    .formGroup {
+      margin-bottom: 1rem;
+      
+      label {
+        display: block;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+      }
+      
+      input, textarea, select {
+        width: 100%;
+        padding: 0.625rem;
+        border: 1px solid #d1d5db;
+        border-radius: 4px;
+        font-size: 1rem;
+        
+        &:focus {
+          outline: none;
+          border-color: #3b82f6;
+          box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+      }
+      
+      textarea {
+        resize: vertical;
+      }
+    }
+    
+    .saveButton {
+      padding: 0.5rem 1rem;
+      background-color: #3b82f6;
+      color: white;
+      border-radius: 4px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      
+      &:hover {
+        background-color: #2563eb;
+      }
+    }
+  }
+}

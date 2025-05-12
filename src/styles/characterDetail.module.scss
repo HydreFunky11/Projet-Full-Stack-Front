@@ -1,0 +1,290 @@
+.characterDetail {
+  padding: 1rem;
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    
+    .backButton {
+      padding: 0.5rem 1rem;
+      background-color: #f3f4f6;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+      
+      &:hover {
+        background-color: #e5e7eb;
+        text-decoration: none;
+      }
+    }
+    
+    .actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+    
+    .actionButton {
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      border: none;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      
+      &:not(.delete):not(.cancel) {
+        background-color: #3b82f6;
+        color: white;
+        
+        &:hover {
+          background-color: #2563eb;
+        }
+      }
+      
+      &.delete {
+        background-color: #ef4444;
+        color: white;
+        
+        &:hover {
+          background-color: #dc2626;
+        }
+      }
+      
+      &.cancel {
+        background-color: #9ca3af;
+        color: white;
+        
+        &:hover {
+          background-color: #6b7280;
+        }
+      }
+    }
+  }
+  
+  .characterInfo {
+    .characterHeader {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      
+      h1 {
+        font-size: 1.875rem;
+        margin: 0;
+      }
+      
+      .status {
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        
+        &.alive {
+          background-color: #10b981;
+          color: white;
+        }
+        
+        &.dead {
+          background-color: #ef4444;
+          color: white;
+        }
+      }
+    }
+    
+    .infoCard {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      padding: 1.5rem;
+      
+      .basicInfo {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+        
+        .infoItem {
+          .label {
+            font-weight: 500;
+            color: #4b5563;
+            margin-right: 0.5rem;
+          }
+          
+          .value {
+            font-weight: 600;
+          }
+        }
+      }
+      
+      .section {
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid #e5e7eb;
+        
+        h2 {
+          font-size: 1.25rem;
+          margin-top: 0;
+          margin-bottom: 0.75rem;
+          color: #374151;
+        }
+        
+        p {
+          margin: 0;
+          line-height: 1.6;
+          color: #4b5563;
+        }
+        
+        stats {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr); // 3 stats par ligne sur grands écrans
+          gap: 0.75rem;
+          
+          @media (max-width: 768px) {
+            grid-template-columns: repeat(2, 1fr); // 2 stats par ligne sur tablettes
+          }
+          
+          @media (max-width: 480px) {
+            grid-template-columns: 1fr; // 1 stat par ligne sur mobiles
+          }
+          
+          .statItem {
+            flex: 0 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f9fafb;
+            border-radius: 4px;
+            padding: 0.75rem 1rem;
+            
+            .statLabel {
+              font-size: 0.875rem;
+              text-transform: uppercase;
+              letter-spacing: 0.05em;
+              color: #6b7280;
+              margin-bottom: 0.25rem;
+            }
+            
+            .statValue {
+              font-size: 1.5rem;
+              font-weight: 700;
+              color: #111827;
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  .editForm {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    
+    h1 {
+      font-size: 1.5rem;
+      margin-top: 0;
+      margin-bottom: 1.5rem;
+    }
+    
+    .formGroup {
+      margin-bottom: 1rem;
+      
+      label {
+        display: block;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+      }
+      
+      input, textarea, select {
+        width: 100%;
+        padding: 0.625rem;
+        border: 1px solid #d1d5db;
+        border-radius: 4px;
+        font-size: 1rem;
+        
+        &:focus {
+          outline: none;
+          border-color: #3b82f6;
+          box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+      }
+      
+      textarea {
+        resize: vertical;
+        min-height: 100px;
+      }
+    }
+    
+    .formRow {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    
+    .checkboxGroup {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+      
+      input {
+        margin-right: 0.5rem;
+      }
+    }
+    
+    .formActions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      
+      button {
+        padding: 0.625rem 1.25rem;
+        border-radius: 4px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        border: none;
+      }
+      
+      .submitButton {
+        background-color: #3b82f6;
+        color: white;
+        
+        &:hover {
+          background-color: #2563eb;
+        }
+      }
+      
+      .cancelButton {
+        background-color: #9ca3af;
+        color: white;
+        
+        &:hover {
+          background-color: #6b7280;
+        }
+      }
+    }
+  }
+  
+  .notFound, .loading, .error {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+    font-size: 1.125rem;
+  }
+  
+  .error {
+    color: #ef4444;
+  }
+  
+  .sessionLink {
+    color: #3b82f6;
+    text-decoration: underline;
+    
+    &:hover {
+      color: #2563eb;
+    }
+  }
+}

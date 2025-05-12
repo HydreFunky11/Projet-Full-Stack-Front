@@ -1,0 +1,305 @@
+.diceRoller {
+  background-color: var(--card-background);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  
+  h3 {
+    margin: 0 0 1rem 0;
+    color: var(--text-color);
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+  
+  .diceForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    
+    .presets {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      
+      .presetButton {
+        background-color: var(--background-color);
+        color: var(--text-color);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius);
+        padding: 0.5rem;
+        font-weight: 500;
+        flex: 1;
+        min-width: 2.5rem;
+        transition: all 0.2s ease;
+        
+        &:hover {
+          background-color: var(--accent-color);
+          color: white;
+          border-color: var(--accent-color);
+        }
+        
+        &:focus {
+          outline: none;
+          box-shadow: 0 0 0 2px rgba(136, 192, 208, 0.5);
+        }
+      }
+    }
+    
+    .inputRow {
+      display: flex;
+      gap: 0.75rem;
+      
+      @media (max-width: 768px) {
+        flex-direction: column;
+      }
+      
+      .expressionInput {
+        flex: 1;
+        padding: 0.75rem;
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius);
+        font-size: 1rem;
+        
+        &:focus {
+          outline: none;
+          border-color: var(--accent-color);
+          box-shadow: 0 0 0 2px rgba(136, 192, 208, 0.3);
+        }
+      }
+      
+      .characterSelect {
+        min-width: 150px;
+        padding: 0.75rem;
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius);
+        background-color: white;
+        font-size: 1rem;
+        
+        &:focus {
+          outline: none;
+          border-color: var(--accent-color);
+          box-shadow: 0 0 0 2px rgba(136, 192, 208, 0.3);
+        }
+      }
+      
+      .rollButton {
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        border-radius: var(--radius);
+        padding: 0.75rem 1.5rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.875rem;
+        letter-spacing: 0.025em;
+        transition: background-color 0.2s ease, transform 0.1s ease;
+        
+        &:hover {
+          background-color: var(--secondary-color);
+        }
+        
+        &:active {
+          transform: translateY(1px);
+        }
+        
+        &:disabled {
+          background-color: var(--text-lighter);
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+  
+  .diceHelp {
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    color: var(--text-light);
+    line-height: 1.4;
+    
+    p {
+      margin: 0.25rem 0;
+    }
+  }
+}
+
+// Animation pour le lancer de dés
+@keyframes rollAnimation {
+  0% {
+    transform: translateY(0) rotate(0);
+    opacity: 1;
+  }
+  10% {
+    transform: translateY(-10px) rotate(-5deg);
+  }
+  20% {
+    transform: translateY(-15px) rotate(5deg);
+  }
+  30% {
+    transform: translateY(-15px) rotate(-5deg);
+  }
+  40% {
+    transform: translateY(-10px) rotate(5deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(-3deg);
+  }
+  60% {
+    transform: translateY(-2px) rotate(3deg);
+  }
+  70% {
+    transform: translateY(0) rotate(-2deg);
+  }
+  80% {
+    transform: translateY(0) rotate(2deg);
+  }
+  90% {
+    transform: translateY(0) rotate(-1deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0);
+    opacity: 1;
+  }
+}
+
+// Styles pour l'affichage des résultats de dés
+.diceResult {
+  background-color: var(--background-color);
+  border-radius: var(--radius);
+  padding: 1rem;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  animation: rollAnimation 0.6s ease-out;
+  
+  .resultExpression {
+    font-family: monospace;
+    font-size: 1.1rem;
+    color: var(--text-color);
+  }
+  
+  .resultTotal {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    background-color: white;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+}
+
+// Historique des lancers
+.rollHistory {
+  margin-top: 1.5rem;
+  
+  .historyTitle {
+    font-size: 1.125rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    .clearButton {
+      font-size: 0.875rem;
+      color: var(--text-light);
+      background: none;
+      border: none;
+      text-decoration: underline;
+      
+      &:hover {
+        color: var(--error-color);
+      }
+    }
+  }
+  
+  .rollsList {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    
+    .rollItem {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem;
+      border-bottom: 1px solid var(--border-color);
+      
+      &:last-child {
+        border-bottom: none;
+      }
+      
+      .rollInfo {
+        display: flex;
+        flex-direction: column;
+        
+        .rollExpression {
+          font-family: monospace;
+          font-size: 1rem;
+        }
+        
+        .rollMeta {
+          font-size: 0.75rem;
+          color: var(--text-lighter);
+          margin-top: 0.25rem;
+          
+          .characterName {
+            font-weight: 500;
+            color: var(--text-light);
+          }
+        }
+      }
+      
+      .rollValue {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--primary-color);
+      }
+      
+      &.critical-success .rollValue {
+        color: var(--success-color);
+      }
+      
+      &.critical-failure .rollValue {
+        color: var(--error-color);
+      }
+    }
+  }
+  
+  .emptyHistory {
+    text-align: center;
+    padding: 2rem 0;
+    color: var(--text-lighter);
+    font-style: italic;
+  }
+}
+
+// Style pour les dés décoratifs (si besoin)
+.decorativeDice {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  opacity: 0.2;
+  z-index: -1;
+  
+  &.d4 {
+    top: 10%;
+    left: 10%;
+    transform: rotate(15deg);
+  }
+  
+  &.d6 {
+    top: 20%;
+    right: 15%;
+    transform: rotate(-10deg);
+  }
+  
+  &.d20 {
+    bottom: 15%;
+    left: 20%;
+    transform: rotate(25deg);
+  }
+}
