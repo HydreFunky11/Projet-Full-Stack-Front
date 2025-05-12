@@ -55,7 +55,7 @@ export const diceRollService = {
   rollDice: async (params: DiceRollParams): Promise<DiceRollResponse> => {
     return apiRequest<DiceRollResponse>('/dice-rolls', {
       method: 'POST',
-      body: params,
+      body: params as unknown as Record<string, unknown>,
     });
   },
   

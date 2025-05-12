@@ -36,6 +36,7 @@ export interface CreateCharacterData {
   stats: string;
   isAlive: boolean;
   sessionId?: number | null;
+  [key: string]: unknown; // Add index signature to make it compatible with Record<string, unknown>
 }
 
 // Interface pour la mise à jour d'un personnage
@@ -49,6 +50,7 @@ export interface UpdateCharacterData {
   stats?: string | Record<string, unknown>;
   isAlive?: boolean;
   sessionId?: number | null;
+  [key: string]: unknown; // Add index signature to make it compatible with Record<string, unknown>
 }
 
 export const characterService = {

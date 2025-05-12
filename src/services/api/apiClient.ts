@@ -30,7 +30,7 @@ export function removeCookie(name: string): void {
   document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/`;
 }
 
-type RequestBody = Record<string, any> | string | FormData | URLSearchParams | Blob | ArrayBuffer | null;
+type RequestBody = Record<string , unknown> | string | FormData | URLSearchParams | Blob | ArrayBuffer | null;
 
 interface ApiOptions {
   method?: string;
