@@ -57,7 +57,7 @@ interface ApiSession extends Session {
 export default function SessionDetail() {
   const params = useParams();
   const router = useRouter();
-  const { user } = useAuth();
+  const { user , isAuthenticated } = useAuth();
   
   // Déclarations des états
   const [session, setSession] = useState<DetailedSession | null>(null);
@@ -148,6 +148,12 @@ export default function SessionDetail() {
       [name]: value,
     }));
   };
+
+  useEffect(() => {
+  if (!loading && !isAuthenticated) {
+    router.push(`/login?from=/sessions/${params.id}`);
+  }
+}, [isAuthenticated, loading, router, params.id]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

@@ -4,12 +4,13 @@ import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { characterService, Character } from '../../../services/api/characterService';
 import { sessionService, Session } from '../../../services/api/sessionService';
+import { useAuth } from '../../../contexts/authContext'; // Import your auth context/hook
 import Link from 'next/link';
 import styles from '../../../styles/characterDetail.module.scss';
-
 export default function CharacterDetail() {
   const params = useParams();
   const router = useRouter();
+  const { isAuthenticated, loading: authLoading } = useAuth(); // Use your auth hook
   const [character, setCharacter] = useState<Character | null>(null);
   const [availableSessions, setAvailableSessions] = useState<Session[]>([]);
   const [loading, setLoading] = useState(true);
@@ -82,6 +83,12 @@ export default function CharacterDetail() {
       }));
     }
   };
+
+  useEffect(() => {
+  if (!authLoading && !isAuthenticated) {
+    router.push(`/login?from=/characters/${params.id}`);
+  }
+}, [isAuthenticated, authLoading, router, params.id]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

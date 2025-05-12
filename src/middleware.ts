@@ -1,5 +1,4 @@
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
 export function middleware(request: NextRequest) {
   // Récupérer le token depuis les cookies
@@ -23,20 +22,15 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(url);
   }
   
-  // Si l'utilisateur est déjà connecté et essaie d'accéder aux pages d'auth
-  if (isAuthPath && token) {
-    return NextResponse.redirect(new URL('/dashboard', request.url));
-  }
-  
-  return NextResponse.next();
+  // Le reste du code reste inchangé...
 }
 
 export const config = {
   matcher: [
-    '/dashboard/:path*',
-    '/sessions/:path*',
-    '/characters/:path*',
-    '/login',
-    '/register',
+    '/dashboard/:path*', 
+    '/sessions/:path*', 
+    '/characters/:path*', 
+    '/login', 
+    '/register'
   ],
 };

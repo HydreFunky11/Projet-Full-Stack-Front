@@ -26,6 +26,12 @@ export default function Characters() {
       setLoading(false);
     }
   };
+  
+  useEffect(() => {
+  if (!authLoading && !isAuthenticated) {
+    router.push(`/login?from=/characters/${params.id}`);
+  }
+}, [isAuthenticated, authLoading, router, params.id]);
 
   const filteredCharacters = characters.filter(
     (char) =>
