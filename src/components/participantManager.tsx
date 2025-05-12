@@ -5,6 +5,13 @@ import { sessionService } from '../services/api/sessionService';
 import { useAuth } from '../contexts/authContext';
 import styles from '../styles/participantManager.module.scss';
 
+// Interface définissant la structure d'un utilisateur
+interface User {
+  id: number;
+  username: string;
+  email?: string;
+}
+
 interface Participant {
   id: number;
   userId: number;
@@ -33,7 +40,7 @@ export default function ParticipantManager({
   onParticipantsChange 
 }: ParticipantManagerProps) {
   const { user } = useAuth();
-  const [allUsers, setAllUsers] = useState<any[]>([]);
+  const [allUsers, setAllUsers] = useState<User[]>([]);
   const [selectedUserId, setSelectedUserId] = useState<number | null>(null);
   const [selectedRole, setSelectedRole] = useState('joueur');
   const [loading, setLoading] = useState(false);
@@ -51,7 +58,7 @@ export default function ParticipantManager({
           // Filtrer les utilisateurs qui ne sont pas déjà participants
           const existingUserIds = participants.map((p) => p.userId);
           const availableUsers = data.users.filter(
-            (u: any) => !existingUserIds.includes(u.id)
+            (u: User) => !existingUserIds.includes(u.id)
           );
           
           setAllUsers(availableUsers);

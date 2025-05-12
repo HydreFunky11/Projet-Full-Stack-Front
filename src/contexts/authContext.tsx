@@ -96,7 +96,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       } else {
         setError("Réponse de connexion invalide");
       }
-    } catch (err: any) {
+    } catch (err) {
       console.error("Erreur lors de la connexion:", err);
       setError(err.message || 'Erreur de connexion');
     } finally {
@@ -117,7 +117,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       } else {
         setError("Réponse d'inscription invalide");
       }
-    } catch (err: any) {
+    } catch (err) {
       console.error("Erreur lors de l'inscription:", err);
       setError(err.message || 'Erreur lors de l\'inscription');
     } finally {

@@ -8,7 +8,7 @@ export interface Character {
   level: number;
   background?: string;
   inventory?: string;
-  stats: string | object;
+  stats: string | Record<string, unknown>;
   isAlive: boolean;
   userId: number;
   sessionId?: number | null;
@@ -25,9 +25,35 @@ export interface Character {
   };
 }
 
+// Interface pour la création d'un personnage
+export interface CreateCharacterData {
+  name: string;
+  race: string;
+  class: string;
+  level: number;
+  background?: string;
+  inventory?: string;
+  stats: string;
+  isAlive: boolean;
+  sessionId?: number | null;
+}
+
+// Interface pour la mise à jour d'un personnage
+export interface UpdateCharacterData {
+  name?: string;
+  race?: string;
+  class?: string;
+  level?: number;
+  background?: string | null;
+  inventory?: string | null;
+  stats?: string | Record<string, unknown>;
+  isAlive?: boolean;
+  sessionId?: number | null;
+}
+
 export const characterService = {
   // Créer un nouveau personnage
-  async createCharacter(characterData: any) {
+  async createCharacter(characterData: CreateCharacterData) {
     try {
       return await apiRequest<{success: boolean; character: Character}>('/characters', {
         method: 'POST',
@@ -60,7 +86,7 @@ export const characterService = {
   },
 
   // Mettre à jour un personnage
-  async updateCharacter(id: number, characterData: any) {
+  async updateCharacter(id: number, characterData: UpdateCharacterData) {
     try {
       return await apiRequest<{success: boolean; character: Character}>(`/characters/${id}`, {
         method: 'PUT',

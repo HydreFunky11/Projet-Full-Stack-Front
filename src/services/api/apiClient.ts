@@ -34,7 +34,7 @@ export function removeCookie(name: string): void {
 interface ApiOptions {
   method?: string;
   headers?: Record<string, string>;
-  body?: any;
+  body?: RequestBody;
   credentials?: RequestCredentials;
   includeAuth?: boolean;
 }

@@ -2,20 +2,20 @@
 
 import { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/authContext';
-import { characterService } from '../services/api/characterService';
-import { diceRollService } from '../services/api/diceRollService';
+import { characterService, Character } from '../services/api/characterService';
+import { diceRollService, DiceRoll } from '../services/api/diceRollService';
 import styles from '../styles/diceRoller.module.scss';
 
 interface DiceRollerProps {
   sessionId: number;
-  onNewRoll: (roll: any) => void;
+  onNewRoll: (roll: DiceRoll) => void;
 }
 
 export default function DiceRoller({ sessionId, onNewRoll }: DiceRollerProps) {
   const { user } = useAuth();
   const [expression, setExpression] = useState('1d20');
   const [selectedCharacterId, setSelectedCharacterId] = useState<number | null>(null);
-  const [characters, setCharacters] = useState<any[]>([]);
+  const [characters, setCharacters] = useState<Character[]>([]);
   const [loading, setLoading] = useState(false);
   const [characterLoading, setCharacterLoading] = useState(true);
 
@@ -74,6 +74,8 @@ export default function DiceRoller({ sessionId, onNewRoll }: DiceRollerProps) {
       setLoading(false);
     }
   };
+
+  // Le reste du code reste inchangé
 
   return (
     <div className={styles.diceRoller}>

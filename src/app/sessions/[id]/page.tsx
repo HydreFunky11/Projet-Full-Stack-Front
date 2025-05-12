@@ -2,21 +2,46 @@
 
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import { sessionService } from '../../../services/api/sessionService';
-import { characterService } from '../../../services/api/characterService';
+import { sessionService, Session } from '../../../services/api/sessionService';
+import { characterService, Character } from '../../../services/api/characterService';
 import { useAuth } from '../../../contexts/authContext';
 import Link from 'next/link';
 import DiceRoller from '../../../components/diceRoller';
 import ParticipantManager from '../../../components/participantManager';
+import { DiceRoll } from '../../../services/api/diceRollService';
 import styles from '../../../styles/sessionDetail.module.scss';
+
+// Interface pour les participants
+interface Participant {
+  id: number;
+  userId: number;
+  sessionId: number;
+  characterId?: number | null;
+  role: string;
+  user: {
+    id: number;
+    username: string;
+    email?: string;
+  };
+  character?: {
+    id: number;
+    name: string;
+  } | null;
+}
+
+// Interface étendue pour Session avec participants
+interface DetailedSession extends Session {
+  participants: Participant[];
+  diceRolls?: DiceRoll[];
+}
 
 export default function SessionDetail() {
   const params = useParams();
   const router = useRouter();
   const { user } = useAuth();
-  const [session, setSession] = useState<any>(null);
-  const [characters, setCharacters] = useState<any[]>([]);
-  const [diceRolls, setDiceRolls] = useState<any[]>([]);
+  const [session, setSession] = useState<DetailedSession | null>(null);
+  const [characters, setCharacters] = useState<Character[]>([]);
+  const [diceRolls, setDiceRolls] = useState<DiceRoll[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [editMode, setEditMode] = useState(false);
@@ -55,7 +80,7 @@ export default function SessionDetail() {
         // Les jets de dés sont déjà récupérés avec la session dans votre API
         if ('diceRolls' in response.session) {
           // If TypeScript doesn't recognize it but it exists at runtime
-          setDiceRolls((response.session as any).diceRolls);
+          setDiceRolls((response.session as DetailedSession).diceRolls || []);
         } else if (response.session.diceRolls) {
           setDiceRolls(response.session.diceRolls);
         }

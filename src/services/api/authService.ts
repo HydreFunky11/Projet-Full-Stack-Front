@@ -16,7 +16,6 @@ export const authService = {
 
   // Connexion
   async login(email: string, password: string) {
-    try {
       const response = await apiRequest<{success: boolean; token: string; user: User}>('/users/login', {
         method: 'POST',
         body: { email, password },
@@ -31,14 +30,10 @@ export const authService = {
       }
       
       return response;
-    } catch (error) {
-      throw error;
-    }
   },
   
   // Inscription
   async register(username: string, email: string, password: string) {
-    try {
       const response = await apiRequest<{success: boolean; token: string; user: User}>('/users/register', {
         method: 'POST',
         body: { username, email, password },
@@ -54,9 +49,6 @@ export const authService = {
       }
       
       return response;
-    } catch (error) {
-      throw error;
-    }
   },
   
   // Déconnexion
