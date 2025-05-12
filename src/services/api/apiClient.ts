@@ -69,7 +69,6 @@ export async function apiRequest<T>(endpoint: string, options: ApiOptions = {}):
     headers: requestHeaders,
     credentials,
     ...(body && { body: JSON.stringify(body) }),
-    ...(noCors && { mode: 'no-cors' }) // Ajouter mode: 'no-cors' si l'option est activée
   };
 
   // Debug: URL complète et options
@@ -77,12 +76,6 @@ export async function apiRequest<T>(endpoint: string, options: ApiOptions = {}):
 
   try {
     const response = await fetch(url, requestOptions);
-    
-    // Si on est en mode no-cors, on ne peut pas accéder à la réponse
-    if (noCors) {
-      // On retourne un objet factice puisqu'on ne peut pas lire la réponse
-      return { success: true } as unknown as T;
-    }
 
     // Vérifier si la réponse est JSON
     const contentType = response.headers.get('content-type');
