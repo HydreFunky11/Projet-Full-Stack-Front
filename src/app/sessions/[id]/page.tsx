@@ -11,7 +11,21 @@ import ParticipantManager from '../../../components/participantManager';
 import { DiceRoll } from '../../../services/api/diceRollService';
 import styles from '../../../styles/sessionDetail.module.scss';
 
-// Interface pour les participants
+// Interface pour définir la structure des participants retournés par l'API
+interface ApiParticipant {
+  id: number;
+  userId: number;
+  role: string;
+  user: {
+    username: string;
+  };
+  character?: {
+    id: number;
+    name: string;
+  } | null;
+}
+
+// Interface pour les participants dans votre application
 interface Participant {
   id: number;
   userId: number;
@@ -30,9 +44,14 @@ interface Participant {
 }
 
 // Interface étendue pour Session avec participants
-interface DetailedSession extends Session {
+interface DetailedSession extends Omit<Session, 'participants'> {
   participants: Participant[];
   diceRolls?: DiceRoll[];
+}
+
+// Interface pour la session retournée par l'API
+interface ApiSession extends Session {
+  participants: ApiParticipant[];
 }
 
 export default function SessionDetail() {
@@ -60,16 +79,28 @@ export default function SessionDetail() {
         
         // Récupérer les détails de la session
         const id = Array.isArray(params.id) ? params.id[0] : params.id;
-        const response = await sessionService.getSessionById(Number(id));
+        const sessionId = Number(id);
+        const response = await sessionService.getSessionById(sessionId);
         
-        // Convertir explicitement la session en DetailedSession
+        // Convertir les participants de l'API au format attendu par l'application
+        const mappedParticipants: Participant[] = response.session.participants?.map(p => ({
+          id: p.id,
+          userId: p.userId,
+          sessionId: sessionId,
+          role: p.role,
+          user: {
+            id: p.userId, // Utiliser userId comme id utilisateur
+            username: p.user.username,
+            email: undefined // Email optionnel
+          },
+          character: p.character,
+          characterId: p.character?.id || null
+        })) || [];
+        
+        // Créer la session détaillée
         const detailedSession: DetailedSession = {
           ...response.session,
-          // Assurez-vous que les participants ont la propriété sessionId
-          participants: response.session.participants?.map(participant => ({
-            ...participant,
-            sessionId: Number(id)  // Ajouter la propriété sessionId manquante
-          })) || [],
+          participants: mappedParticipants,
           diceRolls: ('diceRolls' in response.session) 
             ? (response.session as unknown as { diceRolls: DiceRoll[] }).diceRolls 
             : []
@@ -88,7 +119,7 @@ export default function SessionDetail() {
         });
         
         // Récupérer les personnages de la session
-        const charactersResponse = await characterService.getSessionCharacters(Number(id));
+        const charactersResponse = await characterService.getSessionCharacters(sessionId);
         setCharacters(charactersResponse.characters);
         
         // Les jets de dés sont déjà récupérés avec la session dans votre API
@@ -120,14 +151,13 @@ export default function SessionDetail() {
       const id = Array.isArray(params.id) ? params.id[0] : params.id;
       const response = await sessionService.updateSession(Number(id), formData);
       
-      // Convertir la session mise à jour en DetailedSession
+      // Conserver les participants et diceRolls existants
       if (session) {
-        const updatedDetailedSession: DetailedSession = {
+        setSession({
           ...response.session,
-          participants: session.participants,  // Conserver les participants existants
-          diceRolls: session.diceRolls  // Conserver les jets de dés existants
-        };
-        setSession(updatedDetailedSession);
+          participants: session.participants,
+          diceRolls: session.diceRolls
+        } as DetailedSession);
       }
       
       setEditMode(false);
@@ -135,6 +165,31 @@ export default function SessionDetail() {
       setError((err as Error).message);
     } finally {
       setLoading(false);
+    }
+  };
+
+  // Modifier également le gestionnaire de mise à jour des participants
+  const handleParticipantsChange = (updatedParticipants: any[]) => {
+    if (session) {
+      // Convertir les participants mis à jour au format attendu
+      const typedParticipants: Participant[] = updatedParticipants.map(p => ({
+        id: p.id,
+        userId: p.userId,
+        sessionId: session.id,
+        role: p.role,
+        user: {
+          id: p.user.id || p.userId, // Utiliser l'id existant ou le userId
+          username: p.user.username,
+          email: p.user.email
+        },
+        character: p.character,
+        characterId: p.character?.id || null
+      }));
+
+      setSession({
+        ...session,
+        participants: typedParticipants
+      });
     }
   };
 
@@ -317,21 +372,16 @@ export default function SessionDetail() {
               </div>
             )}
             
-            {activeTab === 'participants' && (
-              <div className={styles.participantsTab}>
-                <ParticipantManager 
-                  sessionId={session.id} 
-                  participants={session.participants} 
-                  isGameMaster={isGameMaster}
-                  onParticipantsChange={(updatedParticipants) => {
-                    setSession({
-                      ...session,
-                      participants: updatedParticipants
-                    });
-                  }}
-                />
-              </div>
-            )}
+     {activeTab === 'participants' && (
+        <div className={styles.participantsTab}>
+          <ParticipantManager 
+            sessionId={session.id} 
+            participants={session.participants} 
+            isGameMaster={isGameMaster}
+            onParticipantsChange={handleParticipantsChange}
+          />
+        </div>
+      )}
             
             {activeTab === 'characters' && (
               <div className={styles.charactersTab}>
