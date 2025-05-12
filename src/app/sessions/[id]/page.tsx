@@ -169,7 +169,7 @@ export default function SessionDetail() {
   };
 
   // Modifier également le gestionnaire de mise à jour des participants
-  const handleParticipantsChange = (updatedParticipants: any[]) => {
+  const handleParticipantsChange = (updatedParticipants: Participant[]) => {
     if (session) {
       // Convertir les participants mis à jour au format attendu
       const typedParticipants: Participant[] = updatedParticipants.map(p => ({
