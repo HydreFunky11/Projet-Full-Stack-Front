@@ -6,6 +6,7 @@ import Link from 'next/link';
 import styles from '../../styles/characters.module.scss';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '../../contexts/authContext';
+
 export default function Characters() {
   const [characters, setCharacters] = useState<Character[]>([]);
   const [loading, setLoading] = useState(true);
@@ -23,18 +24,18 @@ export default function Characters() {
       setLoading(true);
       const response = await characterService.getCharacters();
       setCharacters(response.characters);
-  } catch (err) {
-    setError((err as Error).message);
-  } finally {
-    setLoading(false);
-  }
-};
+    } catch (err) {
+      setError((err as Error).message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-useEffect(() => {
-  if (!loading && !isAuthenticated) {
-    router.push('/login?from=/characters');
-  }
-}, [isAuthenticated, loading, router]);
+  useEffect(() => {
+    if (!loading && !isAuthenticated) {
+      router.push('/login?from=/characters');
+    }
+  }, [isAuthenticated, loading, router]);
 
   const filteredCharacters = characters.filter(
     (char) =>
@@ -98,7 +99,9 @@ useEffect(() => {
                 )}
               </div>
               {character.background && (
-                <p className={styles.characterBackground}>{character.background}</p>
+                <p className={styles.characterBackground}>
+                  {character.background}
+                </p>
               )}
               <div className={styles.characterStatus}>
                 <span

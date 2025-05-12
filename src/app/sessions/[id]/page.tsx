@@ -216,7 +216,11 @@ export default function SessionDetail() {
     }
   };
 
-  const isGameMaster = user && session && user.id === session.gmId;
+const isGameMaster = user && session && user.id === session.gmId;
+const isAdmin = user && session && session.participants.some(
+  p => p.userId === user.id && p.role === 'admin'
+);
+const canModify = isGameMaster || isAdmin;
 
   if (loading) {
     return <div className={styles.loading}>Chargement des détails de la session...</div>;
@@ -236,7 +240,7 @@ export default function SessionDetail() {
         <Link href="/sessions" className={styles.backButton}>
           &larr; Retour aux sessions
         </Link>
-        {isGameMaster && (
+        {canModify && (
           <div className={styles.actions}>
             <button 
               onClick={() => setEditMode(!editMode)} 
@@ -427,6 +431,7 @@ export default function SessionDetail() {
             
             {activeTab === 'diceRolls' && (
               <div className={styles.diceRollsTab}>
+                Seul le MJ peut effectuer des jets de dés.
                 <DiceRoller 
                   sessionId={session.id} 
                   onNewRoll={(newRoll: DiceRoll) => {
