@@ -52,31 +52,27 @@ export default function SessionsPage() {
     fetchSessions();
   }, []);
 
-  const fetchSessions = async () => {
-    try {
-      setLoading(true);
-      
-      // Requête modifiée pour récupérer les sessions publiques
-      // Note: Vous devez modifier votre API pour supporter cette fonctionnalité
-      const endpoint = isAuthenticated ? '/sessions' : '/sessions/public';
-      
-      const response = await apiRequest<{ success: boolean; sessions: Session[] }>(endpoint, {
-        // Si l'utilisateur n'est pas authentifié, ne pas envoyer le token
-        includeAuth: isAuthenticated
-      });
-      
-      if (response.success) {
-        setSessions(response.sessions);
-      } else {
-        setError('Erreur lors de la récupération des sessions');
-      }
-    } catch (err) {
-      setError('Impossible de récupérer les sessions');
-      console.error('Erreur lors de la récupération des sessions:', err);
-    } finally {
-      setLoading(false);
+const fetchSessions = async () => {
+  try {
+    setLoading(true);
+    
+    // Utiliser le même endpoint pour tous les utilisateurs
+    const response = await apiRequest<{ success: boolean; sessions: Session[] }>('/sessions', {
+      includeAuth: true  // Toujours inclure le token d'authentification s'il existe
+    });
+    
+    if (response.success) {
+      setSessions(response.sessions);
+    } else {
+      setError('Erreur lors de la récupération des sessions');
     }
-  };
+  } catch (err) {
+    setError('Impossible de récupérer les sessions');
+    console.error('Erreur lors de la récupération des sessions:', err);
+  } finally {
+    setLoading(false);
+  }
+};
 
   const handleCreateSession = async (e: React.FormEvent) => {
     e.preventDefault();
