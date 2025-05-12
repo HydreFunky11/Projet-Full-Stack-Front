@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 6, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/src/styles/Home.module.scss.module.css [app-ssr] (css module)"],"sourcesContent":["__turbopack_context__.v({\n});\n"],"names":[],"mappings":"AAAA;AACA"}},
-    {"offset": {"line": 14, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/remyb/Documents/cours/dev%20web%20full%20stack/final%20project/Projet-Full-Stack-Front/src/app/page.tsx"],"sourcesContent":["'use client';\r\n\r\nimport styles from '../styles/Home.module.scss';\r\n\r\nexport default function Home() {\r\n  return (\r\n    <main className={styles.main}>\r\n      <h1 className={styles.title}>Projet Full Stack</h1>\r\n      <p className={styles.description}>\r\n        Bienvenue sur votre application Next.js avec React, SCSS, et Turbopack\r\n      </p>\r\n    </main>\r\n  );\r\n}"],"names":[],"mappings":";;;;AAEA;AAFA;;;AAIe,SAAS;IACtB,qBACE,8OAAC;QAAK,WAAW,mJAAA,CAAA,UAAM,CAAC,IAAI;;0BAC1B,8OAAC;gBAAG,WAAW,mJAAA,CAAA,UAAM,CAAC,KAAK;0BAAE;;;;;;0BAC7B,8OAAC;gBAAE,WAAW,mJAAA,CAAA,UAAM,CAAC,WAAW;0BAAE;;;;;;;;;;;;AAKxC","debugId":null}}]
-}

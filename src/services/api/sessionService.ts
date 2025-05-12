@@ -1,5 +1,4 @@
 import { apiRequest } from './apiClient';
-import { User } from './authService';
 
 export interface Session {
   id: number;

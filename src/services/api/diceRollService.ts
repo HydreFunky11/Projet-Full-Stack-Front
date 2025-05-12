@@ -1,5 +1,18 @@
 import { apiRequest } from './apiClient';
 
+// Interface pour les métadonnées des lancers de dés
+export interface DiceRollMetadata {
+  // Définir la structure réelle des métadonnées ici
+  // Par exemple:
+  advantage?: boolean;
+  disadvantage?: boolean;
+  modifier?: number;
+  critical?: boolean;
+  notes?: string;
+  // Si la structure est variable ou inconnue, utilisez Record<string, unknown>
+  [key: string]: unknown;
+}
+
 export interface DiceRoll {
   id: number;
   rollExpression: string;
@@ -8,7 +21,7 @@ export interface DiceRoll {
   sessionId: number;
   characterId?: number | null;
   timestamp: string;
-  metadata?: any;
+  metadata?: DiceRollMetadata; // Type spécifique au lieu de any
   user: {
     id: number;
     username: string;
@@ -23,6 +36,7 @@ export interface DiceRollParams {
   expression: string;
   sessionId: number;
   characterId?: number | null;
+  metadata?: DiceRollMetadata; // Ajouté ici aussi pour cohérence
 }
 
 export interface DiceRollResponse {
