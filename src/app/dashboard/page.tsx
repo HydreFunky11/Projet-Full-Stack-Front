@@ -6,13 +6,22 @@ import { sessionService, Session } from '../../services/api/sessionService';
 import { characterService, Character } from '../../services/api/characterService';
 import Link from 'next/link';
 import styles from '../../styles/dashboard.module.scss';
+import { useRouter } from 'next/navigation';
 
 export default function Dashboard() {
-  const { user } = useAuth();
+  const { user , isAuthenticated, loading: authLoading } = useAuth();
   const [sessions, setSessions] = useState<Session[]>([]);
   const [characters, setCharacters] = useState<Character[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
+
+  // Rediriger si non authentifié
+  useEffect(() => {
+    if (!authLoading && !isAuthenticated) {
+      router.push('/login?from=/dashboard');
+    }
+  }, [isAuthenticated, authLoading, router]);
 
   useEffect(() => {
     const fetchData = async () => {
