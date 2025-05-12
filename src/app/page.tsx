@@ -1,6 +1,6 @@
 'use client';
 
-import styles from '@/styles/Home.module.scss';
+import styles from '../styles/Home.module.scss';
 
 export default function Home() {
   return (

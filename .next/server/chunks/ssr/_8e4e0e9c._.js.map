@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 7, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/remyb/Documents/cours/dev%20web%20full%20stack/final%20project/Projet-Full-Stack-Front/src/app/page.tsx"],"sourcesContent":["'use client';\r\n\r\nimport styles from '@/styles/Home.module.scss';\r\n\r\nexport default function Home() {\r\n  return (\r\n    <main className={styles.main}>\r\n      <h1 className={styles.title}>Projet Full Stack</h1>\r\n      <p className={styles.description}>\r\n        Bienvenue sur votre application Next.js avec React, SCSS, et Turbopack\r\n      </p>\r\n    </main>\r\n  );\r\n}"],"names":[],"mappings":";;;;;;;;;AAAA;;;AAIe,SAAS;IACtB,qBACE,8OAAC;QAAK,WAAW,OAAO,IAAI;;0BAC1B,8OAAC;gBAAG,WAAW,OAAO,KAAK;0BAAE;;;;;;0BAC7B,8OAAC;gBAAE,WAAW,OAAO,WAAW;0BAAE;;;;;;;;;;;;AAKxC","debugId":null}},
-    {"offset": {"line": 51, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/remyb/Documents/cours/dev%20web%20full%20stack/final%20project/Projet-Full-Stack-Front/node_modules/next/src/server/route-modules/app-page/vendored/ssr/react-jsx-dev-runtime.ts"],"sourcesContent":["module.exports = require('../../module.compiled').vendored[\n  'react-ssr'\n].ReactJsxDevRuntime\n"],"names":["module","exports","require","vendored","ReactJsxDevRuntime"],"mappings":";AAAAA,OAAOC,OAAO,GAAGC,QAAQ,4HAAyBC,QAAQ,CACxD,YACD,CAACC,kBAAkB","ignoreList":[0],"debugId":null}}]
-}
