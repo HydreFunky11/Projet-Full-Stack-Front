@@ -4,12 +4,15 @@ import { useEffect, useState } from 'react';
 import { characterService, Character } from '../../services/api/characterService';
 import Link from 'next/link';
 import styles from '../../styles/characters.module.scss';
-
+import { useRouter } from 'next/navigation';
+import { useAuth } from '../../contexts/authContext';
 export default function Characters() {
   const [characters, setCharacters] = useState<Character[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState<string>('');
+  const router = useRouter();
+  const { isAuthenticated } = useAuth();
 
   useEffect(() => {
     fetchCharacters();
@@ -20,18 +23,18 @@ export default function Characters() {
       setLoading(true);
       const response = await characterService.getCharacters();
       setCharacters(response.characters);
-    } catch (err) {
-      setError((err as Error).message);
-    } finally {
-      setLoading(false);
-    }
-  };
-  
-  useEffect(() => {
-  if (!authLoading && !isAuthenticated) {
-    router.push(`/login?from=/characters/${params.id}`);
+  } catch (err) {
+    setError((err as Error).message);
+  } finally {
+    setLoading(false);
   }
-}, [isAuthenticated, authLoading, router, params.id]);
+};
+
+useEffect(() => {
+  if (!loading && !isAuthenticated) {
+    router.push('/login?from=/characters');
+  }
+}, [isAuthenticated, loading, router]);
 
   const filteredCharacters = characters.filter(
     (char) =>
