@@ -61,7 +61,21 @@ export default function SessionDetail() {
         // Récupérer les détails de la session
         const id = Array.isArray(params.id) ? params.id[0] : params.id;
         const response = await sessionService.getSessionById(Number(id));
-        setSession(response.session);
+        
+        // Convertir explicitement la session en DetailedSession
+        const detailedSession: DetailedSession = {
+          ...response.session,
+          // Assurez-vous que les participants ont la propriété sessionId
+          participants: response.session.participants?.map(participant => ({
+            ...participant,
+            sessionId: Number(id)  // Ajouter la propriété sessionId manquante
+          })) || [],
+          diceRolls: ('diceRolls' in response.session) 
+            ? (response.session as unknown as { diceRolls: DiceRoll[] }).diceRolls 
+            : []
+        };
+        
+        setSession(detailedSession);
         
         // Initialiser le formulaire avec les données de la session
         setFormData({
@@ -79,10 +93,7 @@ export default function SessionDetail() {
         
         // Les jets de dés sont déjà récupérés avec la session dans votre API
         if ('diceRolls' in response.session) {
-          // If TypeScript doesn't recognize it but it exists at runtime
-          setDiceRolls((response.session as DetailedSession).diceRolls || []);
-        } else if (response.session.diceRolls) {
-          setDiceRolls(response.session.diceRolls);
+          setDiceRolls((response.session as unknown as { diceRolls: DiceRoll[] }).diceRolls || []);
         }
       } catch (err) {
         setError((err as Error).message);
@@ -108,7 +119,17 @@ export default function SessionDetail() {
       setLoading(true);
       const id = Array.isArray(params.id) ? params.id[0] : params.id;
       const response = await sessionService.updateSession(Number(id), formData);
-      setSession(response.session);
+      
+      // Convertir la session mise à jour en DetailedSession
+      if (session) {
+        const updatedDetailedSession: DetailedSession = {
+          ...response.session,
+          participants: session.participants,  // Conserver les participants existants
+          diceRolls: session.diceRolls  // Conserver les jets de dés existants
+        };
+        setSession(updatedDetailedSession);
+      }
+      
       setEditMode(false);
     } catch (err) {
       setError((err as Error).message);
