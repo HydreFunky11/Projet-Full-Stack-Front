@@ -55,7 +55,24 @@ interface ApiSession extends Session {
 }
 
 export default function SessionDetail() {
-  // ... reste du code inchangé
+  const params = useParams();
+  const router = useRouter();
+  const { user } = useAuth();
+  
+  // Déclarations des états
+  const [session, setSession] = useState<DetailedSession | null>(null);
+  const [characters, setCharacters] = useState<Character[]>([]);
+  const [diceRolls, setDiceRolls] = useState<DiceRoll[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [editMode, setEditMode] = useState(false);
+  const [activeTab, setActiveTab] = useState('info');
+  const [formData, setFormData] = useState({
+    title: '',
+    description: '',
+    scheduledAt: '',
+    status: 'planifiée'
+  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -96,7 +113,24 @@ export default function SessionDetail() {
         
         setSession(detailedSession);
         
-        // ... reste du code inchangé
+        // Initialiser le formulaire avec les données de la session
+        setFormData({
+          title: response.session.title,
+          description: response.session.description || '',
+          scheduledAt: response.session.scheduledAt 
+            ? new Date(response.session.scheduledAt).toISOString().split('T')[0]
+            : '',
+          status: response.session.status
+        });
+
+        // Récupérer les personnages de la session
+        const charactersResponse = await characterService.getSessionCharacters(sessionId);
+        setCharacters(charactersResponse.characters);
+        
+        // Récupérer les jets de dés si disponibles
+        if ('diceRolls' in response.session) {
+          setDiceRolls((response.session as unknown as { diceRolls: DiceRoll[] }).diceRolls || []);
+        }
       } catch (err) {
         setError((err as Error).message);
       } finally {
@@ -343,22 +377,22 @@ export default function SessionDetail() {
               </div>
             )}
             
-     {activeTab === 'participants' && (
-        <div className={styles.participantsTab}>
-          <ParticipantManager 
-            sessionId={session.id} 
-            participants={session.participants} 
-            isGameMaster={isGameMaster}
-            onParticipantsChange={handleParticipantsChange}
-          />
-        </div>
-      )}
+            {activeTab === 'participants' && (
+              <div className={styles.participantsTab}>
+                <ParticipantManager 
+                  sessionId={session.id} 
+                  participants={session.participants} 
+                  isGameMaster={isGameMaster}
+                  onParticipantsChange={handleParticipantsChange}
+                />
+              </div>
+            )}
             
             {activeTab === 'characters' && (
               <div className={styles.charactersTab}>
                 {characters.length > 0 ? (
                   <div className={styles.charactersList}>
-                    {characters.map((character) => (
+                    {characters.map((character: Character) => (
                       <Link
                         key={character.id}
                         href={`/characters/${character.id}`}
@@ -372,7 +406,7 @@ export default function SessionDetail() {
                           {character.race} {character.class}
                         </p>
                         <p className={styles.characterOwner}>
-                          Joueur: {character.user.username}
+                          Joueur: {character.user?.username || 'Inconnu'}
                         </p>
                       </Link>
                     ))}
@@ -389,7 +423,7 @@ export default function SessionDetail() {
               <div className={styles.diceRollsTab}>
                 <DiceRoller 
                   sessionId={session.id} 
-                  onNewRoll={(newRoll) => {
+                  onNewRoll={(newRoll: DiceRoll) => {
                     setDiceRolls([newRoll, ...diceRolls]);
                   }}
                 />
@@ -398,7 +432,7 @@ export default function SessionDetail() {
                   <h3>Historique des jets de dés</h3>
                   {diceRolls.length > 0 ? (
                     <ul className={styles.rollsList}>
-                      {diceRolls.map((roll) => (
+                      {diceRolls.map((roll: DiceRoll) => (
                         <li key={roll.id} className={styles.rollItem}>
                           <div className={styles.rollHeader}>
                             <span className={styles.rollExpression}>
@@ -435,8 +469,4 @@ export default function SessionDetail() {
       )}
     </div>
   );
-}
-
-function setLoading(arg0: boolean) {
-  throw new Error('Function not implemented.');
 }

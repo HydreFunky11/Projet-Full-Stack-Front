@@ -1,4 +1,3 @@
-// Définition de l'URL de l'API avec une valeur par défaut
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api';
 
 // Fonctions utilitaires pour gérer les cookies
@@ -30,6 +29,8 @@ export function removeCookie(name: string): void {
   
   document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/`;
 }
+
+type RequestBody = Record<string, any> | string | FormData | URLSearchParams | Blob | ArrayBuffer | null;
 
 interface ApiOptions {
   method?: string;
