@@ -64,7 +64,7 @@ export default function Dashboard() {
               ))}
             </ul>
           ) : (
-            <p>Vous n'avez pas encore de sessions.</p>
+            <p>Vous n&apos;avez pas encore de sessions.</p>
           )}
           <Link href="/sessions" className={styles.viewAllLink}>
             Voir toutes les sessions
@@ -87,7 +87,7 @@ export default function Dashboard() {
               ))}
             </ul>
           ) : (
-            <p>Vous n'avez pas encore de personnages.</p>
+            <p>Vous n&apos;avez pas encore de personnages.</p>
           )}
           <Link href="/characters" className={styles.viewAllLink}>
             Voir tous les personnages

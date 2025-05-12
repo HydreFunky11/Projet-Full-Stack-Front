@@ -68,7 +68,7 @@ export default function Login() {
         </form>
         
         <p className={styles.authLink}>
-          Vous n'avez pas de compte ? <Link href="/register">Inscrivez-vous</Link>
+          Vous n&apos;avez pas de compte ? <Link href="/register">Inscrivez-vous</Link>
         </p>
       </div>
     </div>

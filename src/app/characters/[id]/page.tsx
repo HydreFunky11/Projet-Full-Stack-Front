@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { characterService, Character } from '../../../services/api/characterService';
-import { sessionService } from '../../../services/api/sessionService';
+import { sessionService, Session } from '../../../services/api/sessionService';
 import Link from 'next/link';
 import styles from '../../../styles/characterDetail.module.scss';
 
@@ -11,7 +11,7 @@ export default function CharacterDetail() {
   const params = useParams();
   const router = useRouter();
   const [character, setCharacter] = useState<Character | null>(null);
-  const [availableSessions, setAvailableSessions] = useState<any[]>([]);
+  const [availableSessions, setAvailableSessions] = useState<Session[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [editMode, setEditMode] = useState(false);

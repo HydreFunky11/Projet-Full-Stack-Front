@@ -33,7 +33,7 @@ export default function Register() {
         {formError && <div className={styles.error}>{formError}</div>}
         <form onSubmit={handleSubmit}>
           <div className={styles.formGroup}>
-            <label htmlFor="username">Nom d'utilisateur</label>
+            <label htmlFor="username">Nom d&apos;utilisateur</label>
             <input
               type="text"
               id="username"
