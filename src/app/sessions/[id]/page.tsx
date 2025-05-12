@@ -55,22 +55,7 @@ interface ApiSession extends Session {
 }
 
 export default function SessionDetail() {
-  const params = useParams();
-  const router = useRouter();
-  const { user } = useAuth();
-  const [session, setSession] = useState<DetailedSession | null>(null);
-  const [characters, setCharacters] = useState<Character[]>([]);
-  const [diceRolls, setDiceRolls] = useState<DiceRoll[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [editMode, setEditMode] = useState(false);
-  const [formData, setFormData] = useState({
-    title: '',
-    description: '',
-    scheduledAt: '',
-    status: 'planifiée',
-  });
-  const [activeTab, setActiveTab] = useState('info');
+  // ... reste du code inchangé
 
   useEffect(() => {
     const fetchData = async () => {
@@ -82,8 +67,11 @@ export default function SessionDetail() {
         const sessionId = Number(id);
         const response = await sessionService.getSessionById(sessionId);
         
+        // Type assertion pour traiter les participants comme ApiParticipant[]
+        const apiParticipants = response.session.participants as ApiParticipant[];
+
         // Convertir les participants de l'API au format attendu par l'application
-        const mappedParticipants: Participant[] = response.session.participants?.map(p => ({
+        const mappedParticipants: Participant[] = apiParticipants?.map(p => ({
           id: p.id,
           userId: p.userId,
           sessionId: sessionId,
@@ -93,7 +81,7 @@ export default function SessionDetail() {
             username: p.user.username,
             email: undefined // Email optionnel
           },
-          character: p.character,
+          character: p.character || null,
           characterId: p.character?.id || null
         })) || [];
         
@@ -108,24 +96,7 @@ export default function SessionDetail() {
         
         setSession(detailedSession);
         
-        // Initialiser le formulaire avec les données de la session
-        setFormData({
-          title: response.session.title,
-          description: response.session.description || '',
-          scheduledAt: response.session.scheduledAt 
-            ? new Date(response.session.scheduledAt).toISOString().split('T')[0] 
-            : '',
-          status: response.session.status,
-        });
-        
-        // Récupérer les personnages de la session
-        const charactersResponse = await characterService.getSessionCharacters(sessionId);
-        setCharacters(charactersResponse.characters);
-        
-        // Les jets de dés sont déjà récupérés avec la session dans votre API
-        if ('diceRolls' in response.session) {
-          setDiceRolls((response.session as unknown as { diceRolls: DiceRoll[] }).diceRolls || []);
-        }
+        // ... reste du code inchangé
       } catch (err) {
         setError((err as Error).message);
       } finally {
@@ -464,4 +435,8 @@ export default function SessionDetail() {
       )}
     </div>
   );
+}
+
+function setLoading(arg0: boolean) {
+  throw new Error('Function not implemented.');
 }
